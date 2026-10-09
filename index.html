@@ -73,22 +73,6 @@
     }
   </script>
   <style>
-    /* PRELOADER STYLES */
-    #preloader {
-      position: fixed;
-      inset: 0;
-      background-color: #050811;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
-    }
-    .loader-pulse {
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-
     /* SCROLL REVEAL ANIMATIONS */
     .reveal {
       opacity: 0;
@@ -285,16 +269,6 @@
   </style>
 </head>
 <body class="bg-brand-navyDark text-slate-200 font-sans selection:bg-brand-gold selection:text-brand-navyDark antialiased overflow-x-hidden">
-
-  <!-- YÜKLEME EKRANI (PRELOADER) -->
-  <div id="preloader">
-    <div class="relative flex items-center justify-center loader-pulse">
-      <div class="logo-live">
-        <img src="1nur-group-logo.png" alt="1NUR GROUP" class="h-40 w-auto object-contain drop-shadow-[0_0_25px_rgba(212,175,55,0.4)] rounded-xl">
-      </div>
-    </div>
-    <div class="mt-6 text-brand-gold font-mono text-xs tracking-[0.3em] font-bold">1NUR GROUP BAŞLATILIYOR...</div>
-  </div>
 
   <!-- Üst Bilgi Çubuğu (Top Bar) -->
   <div class="hidden lg:block bg-black/75 border-b border-white/5 py-2.5 px-6 text-xs text-slate-400 relative z-50">
@@ -1111,22 +1085,7 @@
 
   <!-- PROFESYONEL JAVASCRIPT MOTORU -->
   <script>
-    /* 1. PRELOADER (YÜKLEME EKRANI) - KESİN KAPANMA GARANTİLİ */
-    function removePreloader() {
-      const preloader = document.getElementById('preloader');
-      if (preloader && preloader.style.display !== 'none') {
-        preloader.style.opacity = '0';
-        setTimeout(() => { preloader.style.display = 'none'; }, 800);
-      }
-    }
-    
-    // Normal şartlarda sayfa yüklenince kapatır
-    window.addEventListener('load', removePreloader);
-    
-    // Eğer dış görseller vb. takılı kalırsa en fazla 2 saniye sonra ZORLA kapatır (Hata önleyici)
-    setTimeout(removePreloader, 2000);
-
-    /* 2. SCROLL REVEAL (AŞAĞI KAYDIRDIKÇA ÇIKAN ANİMASYONLAR) */
+    /* 1. SCROLL REVEAL (AŞAĞI KAYDIRDIKÇA ÇIKAN ANİMASYONLAR) */
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
