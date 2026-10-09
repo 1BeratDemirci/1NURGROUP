@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1NUR GROUP | Yazılım & Mühendislik - Otomotiv - Tarım - Petrol | Çukurambar / Ankara</title>
+  <title>1NUR GROUP | Yazılım, Mühendislik, Otomotiv, Tarım, Petrol | Ankara</title>
   <meta name="description" content="1NUR GROUP - Ankara Çukurambar merkezli; Yazılım ve Yüksek Teknoloji Mühendisliği, Otomotiv Filo Çözümleri, Modern Tarım ve Petrol Enerji İkmal Zinciri. Yönetim Kurulu Başkanı: Berat Demirci">
   
   <!-- Tailwind CSS CDN -->
@@ -40,6 +40,34 @@
     }
   </script>
   <style>
+    /* PRELOADER STYLES */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background-color: #050811;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+    }
+    .loader-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* SCROLL REVEAL ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* GLASSMORPHISM & UI */
     .glass-card {
       background: rgba(15, 23, 42, 0.82);
       backdrop-filter: blur(16px);
@@ -62,51 +90,98 @@
     }
     .custom-glow {
       box-shadow: 0 0 35px -5px rgba(212, 175, 55, 0.28);
+      transition: box-shadow 0.4s ease;
+    }
+    .custom-glow:hover {
+      box-shadow: 0 0 50px 0px rgba(212, 175, 55, 0.45);
     }
     
-    /* Canlı Hareketli Ken Burns Arka Plan Animasyonları */
+    /* ANIMATIONS */
     @keyframes kenBurnsA {
       0% { transform: scale(1) translate(0, 0); }
-      50% { transform: scale(1.1) translate(-1.5%, -1%); }
+      50% { transform: scale(1.08) translate(-1%, -1%); }
       100% { transform: scale(1) translate(0, 0); }
     }
     .animate-kenburns {
-      animation: kenBurnsA 22s ease-in-out infinite alternate;
+      animation: kenBurnsA 25s ease-in-out infinite alternate;
     }
 
-    /* Geçiş Parıltısı */
     .flare-sweep {
-      background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.3) 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.4) 50%, transparent 100%);
       transform: skewX(-25deg);
       transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Ekosistem Bağlantı Hatları Animasyonu */
     @keyframes flowLine {
       0% { stroke-dashoffset: 60; }
       100% { stroke-dashoffset: 0; }
     }
     .flow-dash {
-      stroke-dasharray: 6 6;
-      animation: flowLine 2s linear infinite;
+      stroke-dasharray: 8 8;
+      animation: flowLine 1.5s linear infinite;
+    }
+
+    /* SCROLL TO TOP BUTTON */
+    #scrollTopBtn {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+    }
+    #scrollTopBtn.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* PROGRESS BAR ANIMATION */
+    .progress-bar-fill {
+      width: 0%;
+      transition: width 2s cubic-bezier(0.1, 0.7, 0.1, 1);
+    }
+    
+    /* TEXT FADE FOR SLIDER */
+    .text-fade {
+      animation: fadeInText 1s ease forwards;
+    }
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body class="bg-brand-navyDark text-slate-200 font-sans selection:bg-brand-gold selection:text-brand-navyDark antialiased overflow-x-hidden">
 
+  <!-- YÜKLEME EKRANI (PRELOADER) -->
+  <div id="preloader">
+    <div class="relative w-20 h-20 flex items-center justify-center loader-pulse">
+      <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_20px_rgba(212,175,55,0.5)]">
+        <defs>
+          <linearGradient id="goldGradPreloader" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFE89E" />
+            <stop offset="50%" stop-color="#D4AF37" />
+            <stop offset="100%" stop-color="#8F6706" />
+          </linearGradient>
+        </defs>
+        <polygon points="50,4 94,27 94,73 50,96 6,73 6,27" fill="#0B1120" stroke="url(#goldGradPreloader)" stroke-width="4.5"/>
+        <text x="34" y="62" font-family="'Space Grotesk', sans-serif" font-size="34" font-weight="800" fill="url(#goldGradPreloader)" text-anchor="middle">1</text>
+        <text x="64" y="62" font-family="'Space Grotesk', sans-serif" font-size="34" font-weight="900" fill="#FFFFFF" text-anchor="middle">N</text>
+      </svg>
+    </div>
+    <div class="mt-4 text-brand-gold font-mono text-xs tracking-[0.3em] font-bold">1NUR GROUP BAŞLATILIYOR...</div>
+  </div>
+
   <!-- Üst Bilgi Çubuğu (Top Bar) -->
-  <div class="hidden lg:block bg-black/75 border-b border-white/5 py-2.5 px-6 text-xs text-slate-400">
+  <div class="hidden lg:block bg-black/75 border-b border-white/5 py-2.5 px-6 text-xs text-slate-400 relative z-50">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-6">
-        <span class="flex items-center gap-2">
+        <span class="flex items-center gap-2 hover:text-white transition-colors cursor-default">
           <i class="fa-solid fa-location-dot text-brand-gold"></i>
           <span>Genel Merkez: <strong>Çukurambar Mah. Çankaya / Ankara</strong></span>
         </span>
-        <span class="flex items-center gap-2">
+        <span class="flex items-center gap-2 hover:text-white transition-colors cursor-default">
           <i class="fa-solid fa-phone text-brand-gold"></i>
           <span>+90 (312) 400 00 00</span>
         </span>
-        <span class="flex items-center gap-2">
+        <span class="flex items-center gap-2 hover:text-white transition-colors cursor-default">
           <i class="fa-solid fa-envelope text-brand-gold"></i>
           <span>info@1nurgroup.com</span>
         </span>
@@ -116,16 +191,16 @@
           <i class="fa-solid fa-network-wired animate-pulse"></i> 4 ENTEGRE SEKTÖREL EKOSİSTEM
         </span>
         <div class="flex items-center gap-2 pl-4 border-l border-white/10">
-          <span class="text-brand-gold font-bold">TR</span>
+          <button class="text-brand-gold font-bold hover:scale-110 transition-transform">TR</button>
           <span>/</span>
-          <span class="text-slate-500">EN</span>
+          <button class="text-slate-500 hover:text-brand-gold transition-colors">EN</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Ana Navigasyon (Header) -->
-  <header class="sticky top-0 z-50 glass-nav transition-all duration-300">
+  <header class="sticky top-0 z-50 glass-nav transition-all duration-300 shadow-xl shadow-black/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- LOGO: Vektörel Altın Kalkan -->
@@ -156,13 +231,13 @@
 
       <!-- Desktop Menü -->
       <nav class="hidden lg:flex items-center gap-7 text-sm font-medium">
-        <a href="#anasayfa" class="text-slate-300 hover:text-brand-gold transition-colors">Ana Sayfa</a>
-        <a href="#ekosistem" class="text-slate-300 hover:text-brand-gold transition-colors">Ekosistem Şeması</a>
-        <a href="#hakkimizda" class="text-slate-300 hover:text-brand-gold transition-colors">Hakkımızda</a>
-        <a href="#baskan" class="text-slate-300 hover:text-brand-gold transition-colors">Yönetim</a>
-        <a href="#sektorler" class="text-slate-300 hover:text-brand-gold transition-colors">Sektörler</a>
-        <a href="#iletisim" class="px-5 py-2.5 rounded-xl border border-brand-gold/50 text-brand-gold hover:bg-brand-gold hover:text-brand-navyDark transition-all duration-200 shadow-sm shadow-brand-gold/10 font-semibold">
-          Ankara Ofis İletişim
+        <a href="#anasayfa" class="text-slate-300 hover:text-brand-gold hover:-translate-y-0.5 transition-all">Ana Sayfa</a>
+        <a href="#ekosistem" class="text-slate-300 hover:text-brand-gold hover:-translate-y-0.5 transition-all">Ekosistem</a>
+        <a href="#hakkimizda" class="text-slate-300 hover:text-brand-gold hover:-translate-y-0.5 transition-all">Hakkımızda</a>
+        <a href="#baskan" class="text-slate-300 hover:text-brand-gold hover:-translate-y-0.5 transition-all">Yönetim</a>
+        <a href="#sektorler" class="text-slate-300 hover:text-brand-gold hover:-translate-y-0.5 transition-all">Sektörler</a>
+        <a href="#iletisim" class="px-5 py-2.5 rounded-xl border border-brand-gold/50 text-brand-gold hover:bg-brand-gold hover:text-brand-navyDark transition-all duration-300 shadow-sm shadow-brand-gold/10 font-semibold ml-2">
+          İletişime Geç
         </a>
       </nav>
 
@@ -173,7 +248,7 @@
     </div>
 
     <!-- Mobil Menü -->
-    <div id="mobile-menu" class="hidden lg:hidden px-6 pt-4 pb-8 border-t border-white/10 bg-brand-navyDark/98 space-y-4">
+    <div id="mobile-menu" class="hidden lg:hidden px-6 pt-4 pb-8 border-t border-white/10 bg-brand-navyDark/98 space-y-4 shadow-2xl">
       <a href="#anasayfa" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-brand-gold py-2">Ana Sayfa</a>
       <a href="#ekosistem" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-brand-gold py-2">Ekosistem Şeması</a>
       <a href="#hakkimizda" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-brand-gold py-2">Hakkımızda</a>
@@ -188,23 +263,19 @@
     
     <!-- 4 Sektör Resimli & Canlı Ken Burns Animasyon Katmanları -->
     <div class="absolute inset-0 z-0 overflow-hidden">
-      
-      <!-- 0. Yazılım & Mühendislik Resmi (Canlı Hareketli) -->
+      <!-- 0. Yazılım -->
       <div id="slide-0" class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100">
         <div class="w-full h-full bg-cover bg-center animate-kenburns" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop');"></div>
       </div>
-      
-      <!-- 1. Otomotiv Resmi (Canlı Hareketli) -->
+      <!-- 1. Otomotiv -->
       <div id="slide-1" class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0">
         <div class="w-full h-full bg-cover bg-center animate-kenburns" style="background-image: url('https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=2070&auto=format&fit=crop');"></div>
       </div>
-      
-      <!-- 2. Tarım Resmi (Canlı Hareketli) -->
+      <!-- 2. Tarım -->
       <div id="slide-2" class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0">
         <div class="w-full h-full bg-cover bg-center animate-kenburns" style="background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070&auto=format&fit=crop');"></div>
       </div>
-      
-      <!-- 3. Petrol Resmi (Canlı Hareketli) -->
+      <!-- 3. Petrol -->
       <div id="slide-3" class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0">
         <div class="w-full h-full bg-cover bg-center animate-kenburns" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2084&auto=format&fit=crop');"></div>
       </div>
@@ -212,8 +283,8 @@
       <!-- Geçiş Parıltı Efekti -->
       <div id="flare-layer" class="flare-sweep absolute -inset-y-0 -left-full w-full pointer-events-none opacity-0 z-20"></div>
 
-      <!-- Koyu Degrade ve Okunabilirlik Katmanları -->
-      <div class="absolute inset-0 bg-gradient-to-t from-brand-navyDark via-brand-navyDark/85 to-brand-navyDark/65 z-10"></div>
+      <!-- Koyu Degrade -->
+      <div class="absolute inset-0 bg-gradient-to-t from-brand-navyDark via-brand-navyDark/85 to-brand-navyDark/50 z-10"></div>
       <div class="absolute inset-0 bg-black/40 z-10"></div>
     </div>
 
@@ -221,44 +292,44 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-30 py-16 text-center">
       
       <!-- Çukurambar Rozeti -->
-      <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-brand-gold/40 bg-brand-navyDark/85 backdrop-blur-md text-brand-gold text-xs font-semibold tracking-wider uppercase mb-8 shadow-xl">
+      <div class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-brand-gold/40 bg-brand-navyDark/85 backdrop-blur-md text-brand-gold text-xs font-semibold tracking-wider uppercase mb-8 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
         <i class="fa-solid fa-location-dot animate-pulse"></i>
-        <span>Merkez Ofis: Çukurambar / Ankara</span>
-        <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
-        <span class="text-white/80">Canlı Bağlantılı Ekosistem</span>
+        <span>Merkez: Çukurambar / Ankara</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-gold shadow-[0_0_5px_#D4AF37]"></span>
+        <span class="text-white/80">Canlı Ekosistem</span>
       </div>
 
-      <!-- Dinamik Başlık & Sektör Etiketi -->
-      <div class="mb-4">
-        <span id="hero-sector-tag" class="text-brand-gold text-xs sm:text-sm font-bold uppercase tracking-[0.3em] font-mono">
-          Yazılım & Bilişim Mühendisliği &bull; Cloud & AI Systems
-        </span>
+      <div id="hero-text-container" class="text-fade">
+        <div class="mb-4">
+          <span id="hero-sector-tag" class="text-brand-gold text-xs sm:text-sm font-bold uppercase tracking-[0.3em] font-mono">
+            Yazılım & Bilişim Mühendisliği &bull; Cloud & AI Systems
+          </span>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-white mb-6 leading-[1.15]">
+          Geleceği Şekillendiren <br>
+          <span class="gold-gradient-text" id="hero-title-dynamic">Yazılım, Mühendislik & Yatırım</span>
+        </h1>
+
+        <p id="hero-desc-dynamic" class="text-base sm:text-xl text-slate-200 font-light max-w-3xl mx-auto mb-10 leading-relaxed drop-shadow-md">
+          1NUR GROUP; Ankara Çukurambar merkezli yönetim vizyonuyla Yazılım & Yüksek Teknoloji Mühendisliği, Otomotiv, Modern Tarım ve Petrol sektörlerinde yüksek standartlı projeler yönetmektedir.
+        </p>
       </div>
-
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-white mb-6 leading-[1.15]">
-        Geleceği Şekillendiren <br>
-        <span class="gold-gradient-text" id="hero-title-dynamic">Yazılım, Mühendislik & Yatırım</span>
-      </h1>
-
-      <p id="hero-desc-dynamic" class="text-base sm:text-xl text-slate-200 font-light max-w-3xl mx-auto mb-10 leading-relaxed drop-shadow-md">
-        1NUR GROUP; Ankara Çukurambar merkezli yönetim vizyonuyla Yazılım & Yüksek Teknoloji Mühendisliği, Otomotiv, Modern Tarım ve Petrol sektörlerinde yüksek standartlı projeler yönetmektedir.
-      </p>
 
       <!-- Aksiyon Butonları -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
-        <a href="#ekosistem" class="w-full sm:w-auto px-8 py-4 rounded-xl gold-gradient-bg text-brand-navyDark font-bold text-sm sm:text-base shadow-xl shadow-brand-gold/25 hover:opacity-95 transition-all flex items-center justify-center gap-2">
+        <a href="#ekosistem" class="w-full sm:w-auto px-8 py-4 rounded-xl gold-gradient-bg text-brand-navyDark font-bold text-sm sm:text-base shadow-xl shadow-brand-gold/25 hover:scale-105 transition-transform flex items-center justify-center gap-2">
           <i class="fa-solid fa-diagram-project"></i> Sektörel Ekosistemi Gör
         </a>
-        <a href="#iletisim" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-white font-semibold text-sm sm:text-base hover:border-brand-gold transition-all flex items-center justify-center gap-2">
-          <i class="fa-solid fa-map-location-dot text-brand-gold"></i> Ankara Ofisimizi Ziyaret Edin
+        <a href="#iletisim" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-white font-semibold text-sm sm:text-base hover:border-brand-gold transition-colors flex items-center justify-center gap-2 group">
+          <i class="fa-solid fa-map-location-dot text-brand-gold group-hover:animate-bounce"></i> Ankara Ofis Ziyareti
         </a>
       </div>
 
-      <!-- İNTERAKTİF SEKTÖR DEĞİŞTİRME SEKMELERİ (GÖRSELLERİ ANİMASYONLA DEĞİŞTİRİR) -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left">
+      <!-- İNTERAKTİF SEKTÖR DEĞİŞTİRME SEKMELERİ -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left relative z-40">
         
-        <!-- Tab 0: Yazılım & Mühendislik -->
-        <button onclick="setHeroSlide(0)" id="tab-0" class="hero-tab p-3.5 rounded-xl border border-brand-gold bg-brand-gold/15 backdrop-blur-md transition-all text-left flex items-center gap-3">
+        <button onclick="handleManualSlide(0)" id="tab-0" class="hero-tab p-3.5 rounded-xl border border-brand-gold bg-brand-gold/15 backdrop-blur-md transition-all text-left flex items-center gap-3">
           <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-brand-gold text-lg shrink-0">
             <i class="fa-solid fa-code"></i>
           </div>
@@ -268,8 +339,7 @@
           </div>
         </button>
 
-        <!-- Tab 1: Otomotiv -->
-        <button onclick="setHeroSlide(1)" id="tab-1" class="hero-tab p-3.5 rounded-xl border border-white/10 bg-slate-900/60 backdrop-blur-md hover:border-brand-gold/50 transition-all text-left flex items-center gap-3">
+        <button onclick="handleManualSlide(1)" id="tab-1" class="hero-tab p-3.5 rounded-xl border border-white/10 bg-slate-900/60 backdrop-blur-md hover:border-brand-gold/50 hover:bg-slate-800/80 transition-all text-left flex items-center gap-3">
           <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-lg shrink-0">
             <i class="fa-solid fa-car"></i>
           </div>
@@ -279,8 +349,7 @@
           </div>
         </button>
 
-        <!-- Tab 2: Tarım -->
-        <button onclick="setHeroSlide(2)" id="tab-2" class="hero-tab p-3.5 rounded-xl border border-white/10 bg-slate-900/60 backdrop-blur-md hover:border-brand-gold/50 transition-all text-left flex items-center gap-3">
+        <button onclick="handleManualSlide(2)" id="tab-2" class="hero-tab p-3.5 rounded-xl border border-white/10 bg-slate-900/60 backdrop-blur-md hover:border-brand-gold/50 hover:bg-slate-800/80 transition-all text-left flex items-center gap-3">
           <div class="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 text-lg shrink-0">
             <i class="fa-solid fa-wheat-awn"></i>
           </div>
@@ -290,8 +359,7 @@
           </div>
         </button>
 
-        <!-- Tab 3: Petrol -->
-        <button onclick="setHeroSlide(3)" id="tab-3" class="hero-tab p-3.5 rounded-xl border border-white/10 bg-slate-900/60 backdrop-blur-md hover:border-brand-gold/50 transition-all text-left flex items-center gap-3">
+        <button onclick="handleManualSlide(3)" id="tab-3" class="hero-tab p-3.5 rounded-xl border border-white/10 bg-slate-900/60 backdrop-blur-md hover:border-brand-gold/50 hover:bg-slate-800/80 transition-all text-left flex items-center gap-3">
           <div class="w-10 h-10 rounded-lg bg-rose-500/20 flex items-center justify-center text-rose-400 text-lg shrink-0">
             <i class="fa-solid fa-gas-pump"></i>
           </div>
@@ -308,7 +376,7 @@
 
   <!-- 4 SEKTÖRÜ BİRBİRİNE BAĞLAYAN İNTERAKTİF EKOSİSTEM ŞEMASI -->
   <section id="ekosistem" class="py-24 bg-brand-navy/80 border-t border-b border-white/5 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
         <span class="text-xs uppercase font-bold tracking-widest text-brand-gold font-mono mb-2 block">Entegre Altyapı</span>
@@ -320,12 +388,10 @@
         </p>
       </div>
 
-      <!-- Bağlantı Şeması Görseli / Kartları -->
       <div class="relative max-w-5xl mx-auto">
-        
         <!-- Merkez Düğüm: Yazılım & Mühendislik -->
         <div class="flex justify-center mb-12">
-          <div class="glass-card rounded-2xl p-6 border-2 border-brand-gold max-w-md w-full text-center relative custom-glow z-10">
+          <div class="glass-card rounded-2xl p-6 border-2 border-brand-gold max-w-md w-full text-center relative custom-glow hover:-translate-y-2 transition-transform cursor-default z-10">
             <div class="w-12 h-12 rounded-xl gold-gradient-bg mx-auto flex items-center justify-center text-brand-navyDark text-xl font-bold mb-3">
               <i class="fa-solid fa-microchip"></i>
             </div>
@@ -340,64 +406,48 @@
         <!-- Bağlantı Hatları SVG (Animasyonlu) -->
         <div class="hidden md:block absolute inset-0 pointer-events-none z-0">
           <svg class="w-full h-full" viewBox="0 0 1000 450">
-            <!-- Merkezden Otomotive -->
-            <path d="M 500 160 C 500 240, 200 220, 200 300" fill="none" stroke="#D4AF37" stroke-width="2" class="flow-dash opacity-70" />
-            <!-- Merkezden Tarıma -->
-            <path d="M 500 160 C 500 250, 500 250, 500 300" fill="none" stroke="#D4AF37" stroke-width="2" class="flow-dash opacity-70" />
-            <!-- Merkezden Petrole -->
-            <path d="M 500 160 C 500 240, 800 220, 800 300" fill="none" stroke="#D4AF37" stroke-width="2" class="flow-dash opacity-70" />
+            <path d="M 500 160 C 500 240, 200 220, 200 300" fill="none" stroke="#D4AF37" stroke-width="2.5" class="flow-dash opacity-70" />
+            <path d="M 500 160 C 500 250, 500 250, 500 300" fill="none" stroke="#D4AF37" stroke-width="2.5" class="flow-dash opacity-70" />
+            <path d="M 500 160 C 500 240, 800 220, 800 300" fill="none" stroke="#D4AF37" stroke-width="2.5" class="flow-dash opacity-70" />
           </svg>
         </div>
 
         <!-- Alt 3 Sektör Düğümleri -->
         <div class="grid md:grid-cols-3 gap-6 relative z-10 pt-4">
-          
-          <!-- Otomotiv Düğümü -->
-          <div class="glass-card rounded-2xl p-6 border border-emerald-500/30 hover:border-emerald-500 transition-all text-center">
+          <div class="glass-card rounded-2xl p-6 border border-emerald-500/30 hover:border-emerald-500 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] transition-all text-center">
             <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center text-xl font-bold mb-3">
               <i class="fa-solid fa-car"></i>
             </div>
             <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-bold">Telematik & Lojistik</span>
             <h4 class="text-lg font-display font-bold text-white mt-1">1NUR Otomotiv</h4>
-            <p class="text-xs text-slate-300 mt-2">
-              Yazılım tabanlı araç takip ve telematik verilerle yönetilen kurumsal filo ve lojistik ağı.
-            </p>
+            <p class="text-xs text-slate-300 mt-2">Yazılım tabanlı araç takip ve telematik verilerle yönetilen kurumsal filo.</p>
           </div>
 
-          <!-- Tarım Düğümü -->
-          <div class="glass-card rounded-2xl p-6 border border-amber-500/30 hover:border-amber-500 transition-all text-center">
+          <div class="glass-card rounded-2xl p-6 border border-amber-500/30 hover:border-amber-500 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(245,158,11,0.2)] transition-all text-center">
             <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 mx-auto flex items-center justify-center text-xl font-bold mb-3">
               <i class="fa-solid fa-wheat-awn"></i>
             </div>
             <span class="text-[10px] font-mono text-amber-400 uppercase tracking-wider font-bold">IoT & Akıllı Sulama</span>
             <h4 class="text-lg font-display font-bold text-white mt-1">1NUR Tarım</h4>
-            <p class="text-xs text-slate-300 mt-2">
-              Toprak ve hava sensörleriyle otomatik sulama, modern seracılık ve lisanslı depoculuk kontrolü.
-            </p>
+            <p class="text-xs text-slate-300 mt-2">Toprak ve hava sensörleriyle otomatik sulama, modern seracılık kontrolü.</p>
           </div>
 
-          <!-- Petrol Düğümü -->
-          <div class="glass-card rounded-2xl p-6 border border-rose-500/30 hover:border-rose-500 transition-all text-center">
+          <div class="glass-card rounded-2xl p-6 border border-rose-500/30 hover:border-rose-500 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(244,63,94,0.2)] transition-all text-center">
             <div class="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-400 mx-auto flex items-center justify-center text-xl font-bold mb-3">
               <i class="fa-solid fa-gas-pump"></i>
             </div>
-            <span class="text-[10px] font-mono text-rose-400 uppercase tracking-wider font-bold">SCADA & İkmal Takip</span>
+            <span class="text-[10px] font-mono text-rose-400 uppercase tracking-wider font-bold">SCADA & İkmal</span>
             <h4 class="text-lg font-display font-bold text-white mt-1">1NUR Petrol</h4>
-            <p class="text-xs text-slate-300 mt-2">
-              Akıllı seviye ölçümü, toptan şantiye ikmali ve istasyon ağlarında dijital yakıt yönetim mimarisi.
-            </p>
+            <p class="text-xs text-slate-300 mt-2">Akıllı seviye ölçümü, toptan şantiye ve dijital yakıt yönetim mimarisi.</p>
           </div>
-
         </div>
-
       </div>
-
     </div>
   </section>
 
-  <!-- HAKKIMIZDA BÖLÜMÜ -->
+  <!-- HAKKIMIZDA BÖLÜMÜ (Sayaç Animasyonlu) -->
   <section id="hakkimizda" class="py-24 bg-brand-navy/60 border-t border-b border-white/5 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
       
       <div class="grid lg:grid-cols-12 gap-12 items-center">
         <!-- Sol Metin -->
@@ -412,30 +462,26 @@
           <p class="text-slate-300 leading-relaxed">
             <strong>1NUR GROUP</strong>; genel merkezi Ankara Çukurambar'ın prestijli iş merkezleri bölgesinde konumlanan, 4 ana stratejik alanda (Yazılım & Mühendislik, Otomotiv, Tarım ve Petrol) faaliyet gösteren entegre bir sanayi ve teknoloji grubudur.
           </p>
-          <p class="text-slate-400 leading-relaxed text-sm">
-            Mühendislik kolumuzda geliştirdiğimiz kurumsal yazılım mimarileri, bulut çözümleri ve endüstriyel otomasyon sistemleri; otomotivdeki dinamik filo yönetimi, tarımdaki akıllı ziraat teknolojileri ve petrol lojistiğimiz ile kusursuz bir sinerji oluşturmaktadır.
-          </p>
-
           <div class="grid sm:grid-cols-2 gap-4 pt-3">
-            <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5 flex gap-3 items-start">
+            <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5 flex gap-3 items-start hover:border-brand-gold/30 transition-colors">
               <i class="fa-solid fa-laptop-code text-brand-gold mt-1"></i>
               <div>
                 <h4 class="font-semibold text-white text-sm">Yazılım & Yüksek Teknoloji</h4>
-                <p class="text-xs text-slate-400 mt-1">Özel yazılım mimarileri, yapay zeka ve sistem optimizasyonu.</p>
+                <p class="text-xs text-slate-400 mt-1">Özel yazılım mimarileri ve yapay zeka.</p>
               </div>
             </div>
-            <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5 flex gap-3 items-start">
+            <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5 flex gap-3 items-start hover:border-brand-gold/30 transition-colors">
               <i class="fa-solid fa-building text-brand-gold mt-1"></i>
               <div>
                 <h4 class="font-semibold text-white text-sm">Ankara Çukurambar Ofis</h4>
-                <p class="text-xs text-slate-400 mt-1">Holding stratejik karar ve koordinasyon merkezi.</p>
+                <p class="text-xs text-slate-400 mt-1">Stratejik karar ve koordinasyon merkezi.</p>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Sağ İstatistik Kartı -->
-        <div class="lg:col-span-5">
+        <div class="lg:col-span-5" id="stats-container">
           <div class="glass-card rounded-3xl p-8 custom-glow relative overflow-hidden">
             <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-brand-gold/15 rounded-full blur-2xl"></div>
             
@@ -443,37 +489,40 @@
               <div class="w-10 h-10 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark font-bold">
                 <i class="fa-solid fa-chart-line"></i>
               </div>
-              <h3 class="font-display font-bold text-xl text-white">1NUR GROUP Göstergeleri</h3>
+              <h3 class="font-display font-bold text-xl text-white">Performans Göstergeleri</h3>
             </div>
             
-            <div class="space-y-5">
+            <div class="space-y-6">
+              <!-- Bar 1 -->
               <div>
-                <div class="flex justify-between text-xs sm:text-sm mb-1">
+                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
                   <span class="text-slate-300">Yazılım ve Proje Tamamlama Oranı</span>
-                  <span class="text-brand-gold font-bold">%99.8</span>
+                  <span class="text-brand-gold font-bold">%<span class="counter" data-target="99.8">0</span></span>
                 </div>
-                <div class="w-full bg-slate-800 rounded-full h-2">
-                  <div class="bg-brand-gold h-2 rounded-full" style="width: 99.8%"></div>
+                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                  <div class="bg-brand-gold h-2 rounded-full progress-bar-fill" data-width="99.8"></div>
                 </div>
               </div>
 
+              <!-- Bar 2 -->
               <div>
-                <div class="flex justify-between text-xs sm:text-sm mb-1">
+                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
                   <span class="text-slate-300">Teknik Altyapı ve Güvenilirlik</span>
-                  <span class="text-brand-gold font-bold">%100</span>
+                  <span class="text-brand-gold font-bold">%<span class="counter" data-target="100">0</span></span>
                 </div>
-                <div class="w-full bg-slate-800 rounded-full h-2">
-                  <div class="bg-brand-gold h-2 rounded-full" style="width: 100%"></div>
+                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                  <div class="bg-brand-gold h-2 rounded-full progress-bar-fill" data-width="100"></div>
                 </div>
               </div>
 
+              <!-- Bar 3 -->
               <div>
-                <div class="flex justify-between text-xs sm:text-sm mb-1">
+                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
                   <span class="text-slate-300">Paydaş ve Müşteri Memnuniyeti</span>
-                  <span class="text-brand-gold font-bold">%98.9</span>
+                  <span class="text-brand-gold font-bold">%<span class="counter" data-target="98.9">0</span></span>
                 </div>
-                <div class="w-full bg-slate-800 rounded-full h-2">
-                  <div class="bg-brand-gold h-2 rounded-full" style="width: 98.9%"></div>
+                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                  <div class="bg-brand-gold h-2 rounded-full progress-bar-fill" data-width="98.9"></div>
                 </div>
               </div>
             </div>
@@ -484,8 +533,8 @@
                 <div class="text-[10px] text-brand-gold mt-1 uppercase tracking-wider font-semibold">Çukurambar Genel Merkez</div>
               </div>
               <div>
-                <div class="text-3xl font-display font-extrabold text-brand-gold">4 SEKTÖR</div>
-                <div class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">Entegre Operasyon</div>
+                <div class="text-3xl font-display font-extrabold text-brand-gold"><span class="counter" data-target="4">0</span></div>
+                <div class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">Entegre Sektör</div>
               </div>
             </div>
           </div>
@@ -497,14 +546,13 @@
 
   <!-- YÖNETİM KURULU BAŞKANI: BERAT DEMİRCİ -->
   <section id="baskan" class="py-24 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
       
       <div class="glass-card rounded-3xl p-8 sm:p-12 lg:p-16 border border-brand-gold/30 relative">
         <div class="grid lg:grid-cols-12 gap-12 items-center">
           
-          <!-- Başkan Profil Kartı -->
           <div class="lg:col-span-4 flex flex-col items-center text-center">
-            <div class="relative w-56 h-56 sm:w-64 sm:h-64 rounded-3xl p-1.5 gold-gradient-bg shadow-2xl mb-6">
+            <div class="relative w-56 h-56 sm:w-64 sm:h-64 rounded-3xl p-1.5 gold-gradient-bg shadow-2xl mb-6 hover:scale-105 transition-transform duration-500">
               <div class="w-full h-full rounded-[22px] bg-brand-navy flex flex-col items-center justify-center overflow-hidden relative">
                 <i class="fa-solid fa-user-tie text-7xl text-brand-gold/80 mb-2"></i>
                 <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold font-mono">1NUR GROUP</span>
@@ -513,15 +561,8 @@
             <h3 class="text-2xl font-display font-bold text-white">Berat DEMİRCİ</h3>
             <p class="text-brand-gold font-medium text-sm mt-1">Yönetim Kurulu Başkanı</p>
             <p class="text-xs text-slate-400 mt-0.5">1NUR GROUP A.Ş.</p>
-
-            <div class="flex gap-3 mt-4">
-              <a href="#iletisim" class="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-slate-300 hover:text-brand-gold hover:border-brand-gold transition-colors flex items-center gap-2">
-                <i class="fa-solid fa-envelope text-brand-gold"></i> Başkanlık Ofisi
-              </a>
-            </div>
           </div>
 
-          <!-- Başkanın Mesajı -->
           <div class="lg:col-span-8 space-y-6">
             <div class="text-brand-gold text-3xl opacity-60">
               <i class="fa-solid fa-quote-left"></i>
@@ -537,9 +578,6 @@
               </p>
               <p>
                 Yazılım ve mühendislikteki yenilikçi gücümüzü otomotivdeki dinamik filo altyapımızla, modern tarımdaki bereket ve otomasyonu petrol ile enerji alanındaki emniyetli ikmal ağımızla birleştirdik. Faaliyet gösterdiğimiz her sahada yalnızca bugünün değil, yarının ihtiyaçlarını da karşılayan kalıcı sistemler inşa ediyoruz.
-              </p>
-              <p>
-                Bizlere güvenen tüm çözüm ortaklarımıza, çalışanlarımıza ve milletimize teşekkür ediyor; 1NUR GROUP bayrağını ulusal ve küresel pazarda daha da yukarıya taşımak için kararlılıkla çalışmaya devam edeceğimizi ifade ediyorum.
               </p>
             </div>
 
@@ -560,9 +598,59 @@
     </div>
   </section>
 
+  <!-- MİSYON, VİZYON & DEĞERLER -->
+  <section id="degerler" class="py-20 bg-brand-navy/40 border-t border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs uppercase font-bold tracking-widest text-brand-gold mb-3 font-mono">Kurumsal İlkelerimiz</h2>
+        <p class="text-3xl sm:text-4xl font-display font-bold text-white">Misyon, Vizyon & Temel Değerlerimiz</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Misyon -->
+        <div class="glass-card rounded-2xl p-8 hover:border-brand-gold/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="w-14 h-14 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark text-2xl font-bold mb-6">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <h3 class="text-xl font-display font-bold text-white mb-3">Misyonumuz</h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Yazılım ve mühendislik, otomotiv, tarım ve petrol dallarında ileri teknoloji ile yüksek katma değerli çözümler sunmak; çevreye duyarlı operasyonlarla paydaşlarımıza kesintisiz değer sağlamak.
+          </p>
+        </div>
+
+        <!-- Vizyon -->
+        <div class="glass-card rounded-2xl p-8 hover:border-brand-gold/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="w-14 h-14 rounded-xl bg-white/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold text-2xl font-bold mb-6">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <h3 class="text-xl font-display font-bold text-white mb-3">Vizyonumuz</h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Ankara merkezli gücümüzü uluslararası standartlarla birleştirerek, yazılım ve mühendislik başta olmak üzere her sektörde referans gösterilen saygın bir teknoloji holdingi olmak.
+          </p>
+        </div>
+
+        <!-- Değerlerimiz -->
+        <div class="glass-card rounded-2xl p-8 hover:border-brand-gold/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="w-14 h-14 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark text-2xl font-bold mb-6">
+            <i class="fa-solid fa-award"></i>
+          </div>
+          <h3 class="text-xl font-display font-bold text-white mb-3">Temel Değerlerimiz</h3>
+          <ul class="text-slate-300 text-sm space-y-2.5">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold text-xs"></i> Dürüstlük ve Şeffaflık</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold text-xs"></i> Yazılım & Mühendislik Disiplini</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold text-xs"></i> Toprağa & Çevreye Saygı</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold text-xs"></i> İnovasyon Odaklılık</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- 4 SEKTÖR VİTRİNİ -->
   <section id="sektorler" class="py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
       
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
@@ -578,85 +666,63 @@
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <!-- 01. Yazılım & Mühendislik -->
-        <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group flex flex-col justify-between border-blue-500/30">
+        <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group flex flex-col justify-between border-blue-500/30 shadow-lg hover:shadow-blue-500/20">
           <div class="h-44 w-full overflow-hidden relative">
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="1NUR Yazılım & Mühendislik" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
-            <span class="absolute bottom-3 left-4 text-[10px] bg-blue-600/90 text-white font-mono font-bold px-2.5 py-1 rounded-md uppercase tracking-wider backdrop-blur-sm flex items-center gap-1.5">
-              <i class="fa-solid fa-code"></i> Yazılım & Müh.
-            </span>
+            <span class="absolute bottom-3 left-4 text-[10px] bg-blue-600/90 text-white font-mono font-bold px-2.5 py-1 rounded-md uppercase tracking-wider backdrop-blur-sm flex items-center gap-1.5"><i class="fa-solid fa-code"></i> Yazılım & Müh.</span>
           </div>
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div>
               <h3 class="text-xl font-display font-bold text-white mb-2">1NUR Yazılım & Mühendislik</h3>
-              <p class="text-slate-300 text-xs leading-relaxed mb-4">
-                Kurumsal özel yazılım geliştirme, yapay zeka entegrasyonu, bulut mimarisi ve endüstriyel otomasyon sistemleri.
-              </p>
+              <p class="text-slate-300 text-xs leading-relaxed mb-4">Kurumsal özel yazılım, yapay zeka, bulut mimarisi ve endüstriyel otomasyon sistemleri.</p>
             </div>
-            <button onclick="openSectorModal('muhendislik')" class="w-full py-2.5 text-xs font-semibold rounded-xl bg-white/5 hover:bg-brand-gold hover:text-brand-navyDark transition-colors text-slate-300 border border-white/10">
-              Detayları İncele
-            </button>
+            <button onclick="openSectorModal('muhendislik')" class="w-full py-2.5 text-xs font-semibold rounded-xl bg-white/5 hover:bg-brand-gold hover:text-brand-navyDark transition-colors text-slate-300 border border-white/10">Detayları İncele</button>
           </div>
         </div>
 
-        <!-- 02. Otomotiv -->
-        <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group flex flex-col justify-between">
+        <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group flex flex-col justify-between hover:shadow-emerald-500/20">
           <div class="h-44 w-full overflow-hidden relative">
-            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=800&auto=format&fit=crop" alt="1NUR Otomotiv" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
             <span class="absolute bottom-3 left-4 text-[10px] bg-emerald-600/80 text-white font-bold px-2.5 py-1 rounded-md uppercase tracking-wider backdrop-blur-sm">Otomotiv</span>
           </div>
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div>
               <h3 class="text-xl font-display font-bold text-white mb-2">1NUR Otomotiv</h3>
-              <p class="text-slate-300 text-xs leading-relaxed mb-4">
-                Kurumsal uzun dönem filo kiralama, lojistik araç filosu operasyonları ve profesyonel teknik servis ağı.
-              </p>
+              <p class="text-slate-300 text-xs leading-relaxed mb-4">Kurumsal uzun dönem filo kiralama, lojistik araç filosu ve profesyonel teknik servis ağı.</p>
             </div>
-            <button onclick="openSectorModal('otomotiv')" class="w-full py-2.5 text-xs font-semibold rounded-xl bg-white/5 hover:bg-brand-gold hover:text-brand-navyDark transition-colors text-slate-300 border border-white/10">
-              Detayları İncele
-            </button>
+            <button onclick="openSectorModal('otomotiv')" class="w-full py-2.5 text-xs font-semibold rounded-xl bg-white/5 hover:bg-brand-gold hover:text-brand-navyDark transition-colors text-slate-300 border border-white/10">Detayları İncele</button>
           </div>
         </div>
 
-        <!-- 03. Tarım -->
-        <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group flex flex-col justify-between">
+        <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group flex flex-col justify-between hover:shadow-amber-500/20">
           <div class="h-44 w-full overflow-hidden relative">
-            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800&auto=format&fit=crop" alt="1NUR Tarım" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
             <span class="absolute bottom-3 left-4 text-[10px] bg-amber-600/80 text-white font-bold px-2.5 py-1 rounded-md uppercase tracking-wider backdrop-blur-sm">Tarım</span>
           </div>
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div>
               <h3 class="text-xl font-display font-bold text-white mb-2">1NUR Tarım</h3>
-              <p class="text-slate-300 text-xs leading-relaxed mb-4">
-                Akıllı damla sulama altyapıları, modern sera projeleri, endüstriyel tarım ürünleri ve lisanslı depoculuk.
-              </p>
+              <p class="text-slate-300 text-xs leading-relaxed mb-4">Akıllı damla sulama altyapıları, modern sera projeleri ve lisanslı depoculuk.</p>
             </div>
-            <button onclick="openSectorModal('tarim')" class="w-full py-2.5 text-xs font-semibold rounded-xl bg-white/5 hover:bg-brand-gold hover:text-brand-navyDark transition-colors text-slate-300 border border-white/10">
-              Detayları İncele
-            </button>
+            <button onclick="openSectorModal('tarim')" class="w-full py-2.5 text-xs font-semibold rounded-xl bg-white/5 hover:bg-brand-gold hover:text-brand-navyDark transition-colors text-slate-300 border border-white/10">Detayları İncele</button>
           </div>
         </div>
 
-        <!-- 04. Petrol -->
-        <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group flex flex-col justify-between">
+        <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group flex flex-col justify-between hover:shadow-rose-500/20">
           <div class="h-44 w-full overflow-hidden relative">
-            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop" alt="1NUR Petrol" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
             <span class="absolute bottom-3 left-4 text-[10px] bg-rose-600/80 text-white font-bold px-2.5 py-1 rounded-md uppercase tracking-wider backdrop-blur-sm">Petrol & Enerji</span>
           </div>
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div>
               <h3 class="text-xl font-display font-bold text-white mb-2">1NUR Petrol</h3>
-              <p class="text-slate-300 text-xs leading-relaxed mb-4">
-                Akaryakıt istasyon zincirleri, toptan şantiye ve filo yakıt ikmali, madeni yağ dağıtımı ve güvenli depolama.
-              </p>
+              <p class="text-slate-300 text-xs leading-relaxed mb-4">Akaryakıt istasyon zincirleri, toptan şantiye yakıt ikmali ve güvenli madeni yağ depolama.</p>
             </div>
-            <button onclick="openSectorModal('petrol')" class="w-full py-2.5 text-xs font-semibold rounded-xl bg-white/5 hover:bg-brand-gold hover:text-brand-navyDark transition-colors text-slate-300 border border-white/10">
-              Detayları İncele
-            </button>
+            <button onclick="openSectorModal('petrol')" class="w-full py-2.5 text-xs font-semibold rounded-xl bg-white/5 hover:bg-brand-gold hover:text-brand-navyDark transition-colors text-slate-300 border border-white/10">Detayları İncele</button>
           </div>
         </div>
 
@@ -666,49 +732,35 @@
   </section>
 
   <!-- İLETİŞİM & ANKARA ÇUKURAMBAR BÖLÜMÜ -->
-  <section id="iletisim" class="py-24 bg-brand-navy/60 border-t border-white/5">
+  <section id="iletisim" class="py-24 bg-brand-navy/60 border-t border-white/5 reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="grid lg:grid-cols-12 gap-12">
-        <!-- Bilgiler -->
         <div class="lg:col-span-5 space-y-6">
           <span class="text-xs font-bold tracking-widest text-brand-gold uppercase font-mono">Genel Merkez İletişim</span>
-          <h2 class="text-3xl sm:text-4xl font-display font-bold text-white">
-            Ankara Ofisimizde <br><span class="gold-gradient-text">Görüşelim</span>
-          </h2>
+          <h2 class="text-3xl sm:text-4xl font-display font-bold text-white">Ankara Ofisimizde <br><span class="gold-gradient-text">Görüşelim</span></h2>
           <p class="text-slate-300 text-sm leading-relaxed">
-            1NUR GROUP projeleri, yazılım ve mühendislik teklifleri veya kurumsal iş birlikleri için Ankara Çukurambar'daki merkez ofisimizi ziyaret edebilir ya da formu doldurabilirsiniz.
+            1NUR GROUP projeleri, yazılım ve mühendislik teklifleri için Çukurambar'daki merkez ofisimizi ziyaret edebilir ya da formu doldurabilirsiniz.
           </p>
 
           <div class="space-y-4 pt-2">
-            <!-- Adres -->
-            <div class="flex items-start gap-4 p-4 rounded-2xl glass-card">
-              <div class="w-11 h-11 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark font-bold text-lg shrink-0 mt-0.5">
-                <i class="fa-solid fa-location-dot"></i>
-              </div>
+            <div class="flex items-start gap-4 p-4 rounded-2xl glass-card hover:border-brand-gold/40 transition-colors">
+              <div class="w-11 h-11 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark font-bold text-lg shrink-0 mt-0.5"><i class="fa-solid fa-location-dot"></i></div>
               <div>
                 <div class="text-xs text-brand-gold font-bold uppercase tracking-wider">Genel Merkez Adresi</div>
                 <div class="text-sm font-semibold text-white mt-1">Çukurambar Mahallesi, Çankaya / Ankara, Türkiye</div>
-                <p class="text-xs text-slate-400 mt-0.5">1NUR GROUP Yönetim Binası (39.9075° N, 32.8125° E)</p>
+                <p class="text-xs text-slate-400 mt-0.5">1NUR GROUP Yönetim Binası</p>
               </div>
             </div>
-
-            <!-- Telefon -->
-            <div class="flex items-center gap-4 p-4 rounded-2xl glass-card">
-              <div class="w-11 h-11 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark font-bold text-lg shrink-0">
-                <i class="fa-solid fa-phone"></i>
-              </div>
+            <div class="flex items-center gap-4 p-4 rounded-2xl glass-card hover:border-brand-gold/40 transition-colors">
+              <div class="w-11 h-11 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark font-bold text-lg shrink-0"><i class="fa-solid fa-phone"></i></div>
               <div>
                 <div class="text-xs text-brand-gold font-bold uppercase tracking-wider">Santral & İletişim</div>
                 <div class="text-sm font-semibold text-white mt-0.5">+90 (312) 400 00 00</div>
               </div>
             </div>
-
-            <!-- E-posta -->
-            <div class="flex items-center gap-4 p-4 rounded-2xl glass-card">
-              <div class="w-11 h-11 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark font-bold text-lg shrink-0">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
+            <div class="flex items-center gap-4 p-4 rounded-2xl glass-card hover:border-brand-gold/40 transition-colors">
+              <div class="w-11 h-11 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark font-bold text-lg shrink-0"><i class="fa-solid fa-envelope"></i></div>
               <div>
                 <div class="text-xs text-brand-gold font-bold uppercase tracking-wider">Kurumsal E-Posta</div>
                 <div class="text-sm font-semibold text-white mt-0.5">info@1nurgroup.com</div>
@@ -717,50 +769,45 @@
           </div>
         </div>
 
-        <!-- Form -->
         <div class="lg:col-span-7">
           <form id="contactForm" onsubmit="handleFormSubmit(event)" class="glass-card p-8 sm:p-10 rounded-3xl space-y-4 border border-brand-gold/20">
             <h3 class="font-display font-bold text-xl text-white mb-2">Bize Mesaj Gönderin</h3>
-            
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs text-slate-300 mb-1.5 font-medium">Ad Soyad *</label>
-                <input type="text" required placeholder="Adınız Soyadınız" class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
+                <input type="text" required class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
               </div>
               <div>
                 <label class="block text-xs text-slate-300 mb-1.5 font-medium">E-Posta *</label>
-                <input type="email" required placeholder="ornek@sirket.com" class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
+                <input type="email" required class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
               </div>
             </div>
-
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
-                <label class="block text-xs text-slate-300 mb-1.5 font-medium">Telefon Numarası</label>
-                <input type="tel" placeholder="+90 (5XX) XXX XX XX" class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
+                <label class="block text-xs text-slate-300 mb-1.5 font-medium">Telefon</label>
+                <input type="tel" class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
               </div>
               <div>
                 <label class="block text-xs text-slate-300 mb-1.5 font-medium">İlgili Sektör *</label>
                 <select required class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
-                  <option value="">Sektör Seçiniz</option>
-                  <option value="yazilim">1NUR Yazılım & Mühendislik</option>
-                  <option value="otomotiv">1NUR Otomotiv</option>
-                  <option value="tarim">1NUR Tarım</option>
-                  <option value="petrol">1NUR Petrol & Enerji</option>
-                  <option value="genel">Yönetim Kurulu / Berat Demirci Ofisi</option>
+                  <option value="">Seçiniz</option>
+                  <option value="yazilim">Yazılım & Mühendislik</option>
+                  <option value="otomotiv">Otomotiv</option>
+                  <option value="tarim">Tarım</option>
+                  <option value="petrol">Petrol & Enerji</option>
+                  <option value="genel">Yönetim Kurulu</option>
                 </select>
               </div>
             </div>
-
             <div>
               <label class="block text-xs text-slate-300 mb-1.5 font-medium">Mesajınız *</label>
-              <textarea rows="4" required placeholder="Görüşmek istediğiniz konuyu veya proje detaylarını belirtiniz..." class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors"></textarea>
+              <textarea rows="4" required class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors"></textarea>
             </div>
-
-            <button type="submit" class="w-full py-4 rounded-xl gold-gradient-bg text-brand-navyDark font-bold text-sm tracking-wide shadow-lg shadow-brand-gold/25 hover:opacity-95 transition-all">
+            <button type="submit" class="w-full py-4 rounded-xl gold-gradient-bg text-brand-navyDark font-bold text-sm shadow-lg hover:scale-[1.02] transition-transform">
               Mesajı Ankara Merkezimize İlet
             </button>
             <p id="formFeedback" class="hidden text-xs text-center text-emerald-400 font-medium pt-2">
-              <i class="fa-solid fa-circle-check mr-1"></i> Mesajınız Ankara merkez ofisimize iletildi. En kısa sürede geri dönüş yapılacaktır.
+              <i class="fa-solid fa-circle-check mr-1"></i> Mesajınız iletildi.
             </p>
           </form>
         </div>
@@ -773,233 +820,247 @@
   <footer class="bg-black/95 border-t border-white/10 pt-16 pb-8 text-xs text-slate-400">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-white/10">
-        
-        <!-- Logo & Açıklama -->
         <div class="space-y-4">
           <div class="flex items-center gap-3">
-            <svg viewBox="0 0 100 100" class="w-9 h-9">
-              <polygon points="50,4 94,27 94,73 50,96 6,73 6,27" fill="#0B1120" stroke="#D4AF37" stroke-width="4.5"/>
-              <text x="34" y="62" font-family="'Space Grotesk'" font-size="34" font-weight="800" fill="#D4AF37" text-anchor="middle">1</text>
-              <text x="64" y="62" font-family="'Space Grotesk'" font-size="34" font-weight="900" fill="#FFFFFF" text-anchor="middle">N</text>
-            </svg>
+            <svg viewBox="0 0 100 100" class="w-9 h-9"><polygon points="50,4 94,27 94,73 50,96 6,73 6,27" fill="#0B1120" stroke="#D4AF37" stroke-width="4.5"/><text x="34" y="62" font-family="'Space Grotesk'" font-size="34" font-weight="800" fill="#D4AF37" text-anchor="middle">1</text><text x="64" y="62" font-family="'Space Grotesk'" font-size="34" font-weight="900" fill="#FFFFFF" text-anchor="middle">N</text></svg>
             <span class="font-display font-bold text-xl text-white">1NUR<span class="text-brand-gold font-light">GROUP</span></span>
           </div>
-          <p class="leading-relaxed">
-            Yazılım & Mühendislik, Otomotiv, Tarım ve Petrol sektörlerinde geleceğe değer katan güvenilir holding yapısı.
-          </p>
-          <div class="text-[11px] text-slate-500">
-            <i class="fa-solid fa-location-dot text-brand-gold mr-1"></i> Çukurambar Mah. Çankaya / Ankara
-          </div>
+          <p class="leading-relaxed">Yazılım, Otomotiv, Tarım ve Petrol sektörlerinde geleceğe değer katan güvenilir holding.</p>
+          <div class="text-[11px] text-slate-500"><i class="fa-solid fa-location-dot text-brand-gold mr-1"></i> Çukurambar Mah. / Ankara</div>
         </div>
-
-        <!-- Hızlı Bağlantılar -->
         <div>
-          <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Kurumsal Menü</h4>
+          <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Kurumsal</h4>
           <ul class="space-y-2">
             <li><a href="#anasayfa" class="hover:text-brand-gold transition-colors">Ana Sayfa</a></li>
-            <li><a href="#ekosistem" class="hover:text-brand-gold transition-colors">Ekosistem Şeması</a></li>
             <li><a href="#hakkimizda" class="hover:text-brand-gold transition-colors">Hakkımızda</a></li>
             <li><a href="#baskan" class="hover:text-brand-gold transition-colors">Yönetim Kurulu Başkanı</a></li>
-            <li><a href="#sektorler" class="hover:text-brand-gold transition-colors">Faaliyet Alanlarımız</a></li>
           </ul>
         </div>
-
-        <!-- Sektörler -->
         <div>
           <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Sektörlerimiz</h4>
           <ul class="space-y-2">
-            <li><a href="#sektorler" class="hover:text-brand-gold transition-colors">1NUR Yazılım & Mühendislik</a></li>
+            <li><a href="#sektorler" class="hover:text-brand-gold transition-colors">1NUR Yazılım & Müh.</a></li>
             <li><a href="#sektorler" class="hover:text-brand-gold transition-colors">1NUR Otomotiv</a></li>
             <li><a href="#sektorler" class="hover:text-brand-gold transition-colors">1NUR Tarım</a></li>
             <li><a href="#sektorler" class="hover:text-brand-gold transition-colors">1NUR Petrol</a></li>
           </ul>
         </div>
-
-        <!-- Yönetim & Merkez -->
         <div>
           <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Yönetim</h4>
           <p class="text-white font-semibold text-sm">Berat DEMİRCİ</p>
           <p class="text-brand-gold mb-3 text-xs">Yönetim Kurulu Başkanı</p>
-          <p class="text-slate-400 text-[11px] leading-relaxed">
-            Genel Merkez: Çukurambar / Ankara
-          </p>
+          <p class="text-slate-400 text-[11px]">Genel Merkez: Çukurambar / Ankara</p>
         </div>
-
       </div>
-
       <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px]">
         <p>&copy; 2026 1NUR GROUP. Tüm Hakları Saklıdır.</p>
-        <p class="text-slate-500">Yazılım &bull; Mühendislik &bull; Otomotiv &bull; Tarım &bull; Petrol</p>
       </div>
     </div>
   </footer>
 
   <!-- Sektör Detay Modalı -->
-  <div id="sectorModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="glass-card max-w-lg w-full rounded-3xl p-6 sm:p-8 border border-brand-gold/40 relative">
-      <button onclick="closeSectorModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+  <div id="sectorModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity">
+    <div class="glass-card max-w-lg w-full rounded-3xl p-6 sm:p-8 border border-brand-gold/40 relative shadow-2xl">
+      <button onclick="closeSectorModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl transition-colors"><i class="fa-solid fa-xmark"></i></button>
       <div id="modalContent"></div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT: SLAYT, IŞIK PARILTISI & ETKİLEŞİM MOTORU -->
-  <script>
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    }
+  <!-- Yukarı Çık Butonu -->
+  <button id="scrollTopBtn" onclick="window.scrollTo(0,0)" class="fixed bottom-6 right-6 w-12 h-12 rounded-full gold-gradient-bg text-brand-navyDark flex items-center justify-center text-xl shadow-[0_0_15px_rgba(212,175,55,0.4)] hover:scale-110 z-40 cursor-pointer">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
 
-    // Hero Alanı Dinamik Verileri
-    const heroSlidesData = [
-      {
-        tag: "Yazılım & Bilişim Mühendisliği • Cloud & AI Systems",
-        title: "Yazılım & Yüksek Teknolojide Lider",
-        desc: "1NUR GROUP Yazılım & Mühendislik; kurumsal web mimarileri, yapay zeka entegrasyonları, büyük veri analitiği ve endüstriyel otomasyonda yüksek teknolojili çözümler sunar."
-      },
-      {
-        tag: "Kurumsal Filo & Lojistik Mobilite",
-        title: "Otomotivde Kesintisiz Dinamizm",
-        desc: "1NUR GROUP Otomotiv; uzun dönem kurumsal filo kiralama, lojistik araç tedariği ve güvenilir servis ağıyla işletmelerin hareket gücüdür."
-      },
-      {
-        tag: "Modern Tarım & Akıllı Sulama Sistemleri",
-        title: "Topraktan Geleceğe Yatırım",
-        desc: "1NUR GROUP Tarım; modern sera projeleri, otomasyonlu sulama ve lisanslı depoculukla tarımsal verimliliği en üst seviyeye taşır."
-      },
-      {
-        tag: "Akaryakıt & Enerji İkmal Zinciri",
-        title: "Petrol ve Enerjide Güvenilir Ağ",
-        desc: "1NUR GROUP Petrol; akaryakıt istasyon ağları, toptan şantiye ikmali ve madeni yağ tedariğinde kesintisiz ve emniyetli lojistik sağlar."
+  <!-- PROFESYONEL JAVASCRIPT MOTORU -->
+  <script>
+    /* 1. PRELOADER (YÜKLEME EKRANI) */
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      setTimeout(() => {
+        preloader.style.opacity = '0';
+        setTimeout(() => { preloader.style.display = 'none'; }, 800);
+      }, 600); // Gerçekçi bir kısa bekleme süresi
+    });
+
+    /* 2. SCROLL REVEAL (AŞAĞI KAYDIRDIKÇA ÇIKAN ANİMASYONLAR) */
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target); // Sadece bir kere çalışsın
+        }
+      });
+    }, { threshold: 0.15 });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    /* 3. DİNAMİK SAYAÇLAR VE PROGRESS BARLAR */
+    const counters = document.querySelectorAll('.counter');
+    const progressBars = document.querySelectorAll('.progress-bar-fill');
+    let hasCounted = false;
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      if(entries[0].isIntersecting && !hasCounted) {
+        hasCounted = true;
+        // Progress barları doldur
+        progressBars.forEach(bar => {
+          bar.style.width = bar.getAttribute('data-width') + '%';
+        });
+        // Sayıları artır
+        counters.forEach(counter => {
+          const target = parseFloat(counter.getAttribute('data-target'));
+          const duration = 2000;
+          const stepTime = Math.abs(Math.floor(duration / 100));
+          let current = 0;
+          const timer = setInterval(() => {
+            current += (target / 100);
+            if (current >= target) {
+              counter.innerText = target;
+              clearInterval(timer);
+            } else {
+              // Ondalıklı sayıysa virgüllü göster
+              counter.innerText = target % 1 !== 0 ? current.toFixed(1) : Math.floor(current);
+            }
+          }, stepTime);
+        });
       }
+    }, { threshold: 0.5 });
+    
+    const statsContainer = document.getElementById('stats-container');
+    if(statsContainer) statsObserver.observe(statsContainer);
+
+    /* 4. SCROLL TO TOP BUTONU */
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('scrollTopBtn');
+      if (window.scrollY > 400) {
+        btn.classList.add('show');
+      } else {
+        btn.classList.remove('show');
+      }
+    });
+
+    /* 5. HERO SLIDER & GEÇİŞ EFEKTLERİ */
+    const heroSlidesData = [
+      { tag: "Yazılım & Bilişim • Cloud & AI", title: "Yazılım & Yüksek Teknolojide Lider", desc: "1NUR GROUP; kurumsal web mimarileri, yapay zeka ve otomasyonda öncüdür." },
+      { tag: "Kurumsal Filo & Lojistik", title: "Otomotivde Kesintisiz Dinamizm", desc: "Uzun dönem kurumsal filo kiralama ve güvenilir servis ağı." },
+      { tag: "Modern Tarım & IoT", title: "Topraktan Geleceğe Yatırım", desc: "Modern sera, otomasyonlu sulama ve lisanslı depoculuk altyapısı." },
+      { tag: "Akaryakıt İkmal Zinciri", title: "Petrol ve Enerjide Güvenilir Ağ", desc: "Akaryakıt istasyon ağları ve toptan şantiye ikmalinde kesintisiz lojistik." }
     ];
 
     let currentSlide = 0;
     let slideInterval;
 
-    function triggerFlare() {
+    function triggerFlareAndText() {
+      // Işık parıltısı
       const flare = document.getElementById('flare-layer');
-      if (!flare) return;
-      flare.style.opacity = '1';
-      flare.style.left = '-100%';
-      setTimeout(() => {
-        flare.style.left = '200%';
-      }, 50);
-      setTimeout(() => {
-        flare.style.opacity = '0';
+      if (flare) {
+        flare.style.opacity = '1';
         flare.style.left = '-100%';
-      }, 900);
+        setTimeout(() => { flare.style.left = '200%'; }, 50);
+        setTimeout(() => { flare.style.opacity = '0'; flare.style.left = '-100%'; }, 900);
+      }
+      // Metin animasyonu sıfırlama
+      const textContainer = document.getElementById('hero-text-container');
+      if(textContainer) {
+        textContainer.classList.remove('text-fade');
+        void textContainer.offsetWidth; // DOM Refresh
+        textContainer.classList.add('text-fade');
+      }
     }
 
     function setHeroSlide(index) {
-      if (currentSlide !== index) {
-        triggerFlare();
-      }
+      if (currentSlide !== index) triggerFlareAndText();
       currentSlide = index;
+      
       for (let i = 0; i < 4; i++) {
         const slide = document.getElementById(`slide-${i}`);
         const tab = document.getElementById(`tab-${i}`);
         if (i === index) {
-          slide.classList.remove('opacity-0');
-          slide.classList.add('opacity-100');
+          slide.classList.replace('opacity-0', 'opacity-100');
           tab.classList.add('border-brand-gold', 'bg-brand-gold/15');
           tab.classList.remove('border-white/10', 'bg-slate-900/60');
         } else {
-          slide.classList.add('opacity-0');
-          slide.classList.remove('opacity-100');
+          slide.classList.replace('opacity-100', 'opacity-0');
           tab.classList.remove('border-brand-gold', 'bg-brand-gold/15');
           tab.classList.add('border-white/10', 'bg-slate-900/60');
         }
       }
 
-      const data = heroSlidesData[index];
-      document.getElementById('hero-sector-tag').innerText = data.tag;
-      document.getElementById('hero-title-dynamic').innerText = data.title;
-      document.getElementById('hero-desc-dynamic').innerText = data.desc;
+      document.getElementById('hero-sector-tag').innerText = heroSlidesData[index].tag;
+      document.getElementById('hero-title-dynamic').innerText = heroSlidesData[index].title;
+      document.getElementById('hero-desc-dynamic').innerText = heroSlidesData[index].desc;
     }
 
     function startAutoSlide() {
       slideInterval = setInterval(() => {
-        const next = (currentSlide + 1) % 4;
-        setHeroSlide(next);
+        setHeroSlide((currentSlide + 1) % 4);
       }, 5500);
     }
+
+    function handleManualSlide(index) {
+      clearInterval(slideInterval); // Kullanıcı tıklayınca sayacı sıfırla
+      setHeroSlide(index);
+      startAutoSlide(); // Sayacı yeniden başlat
+    }
+
     startAutoSlide();
 
-    // Sektör Modalı Verileri
+    /* 6. MOBİL MENÜ & MODALLAR */
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
     const sectorDetails = {
       muhendislik: {
         title: "1NUR Yazılım & Mühendislik",
-        desc: "Ankara Çukurambar merkezli yazılım ve mühendislik kadromuzla; kurumsal dijital dönüşüm, yapay zeka, yüksek performanslı web/mobil mimariler ve endüstriyel otomasyon üretiyoruz.",
-        items: [
-          "Full-Stack Kurumsal Web & Yazılım Geliştirme",
-          "Yapay Zeka (AI) & Veri Analitiği Entegrasyonları",
-          "Bulut (Cloud) Bilişim & Siber Güvenlik Mimarisi",
-          "Endüstriyel IoT & Otomasyon Yazılımları",
-          "Statik, Mekanik ve Elektrik Mühendislik Taahhüt"
-        ]
+        desc: "Ankara Çukurambar merkezli kadromuzla; yapay zeka, web/mobil mimariler ve endüstriyel otomasyon üretiyoruz.",
+        items: ["Full-Stack Kurumsal Yazılım", "Yapay Zeka (AI) Entegrasyonu", "Bulut (Cloud) Bilişim", "Endüstriyel IoT"]
       },
       otomotiv: {
         title: "1NUR Otomotiv",
-        desc: "Şirketlerin operasyonel mobilite ihtiyaçlarına yönelik geniş filo tedariği, lojistik filo yönetimi ve satış sonrası tam teknik destek sunar.",
-        items: [
-          "Uzun Dönem Kurumsal Binek & Ticari Filo",
-          "Ağır Vasıta & Lojistik Araç Tedariği",
-          "7/24 Kesintisiz Yol Yardımı & Servis",
-          "Telematik Filo Yönetim Sistemleri"
-        ]
+        desc: "Şirketlerin mobilite ihtiyaçlarına yönelik geniş filo tedariği ve telematik yönetim.",
+        items: ["Uzun Dönem Filo", "Lojistik Araç Tedariği", "7/24 Teknik Servis", "Telematik Takip"]
       },
       tarim: {
         title: "1NUR Tarım",
-        desc: "Gıda güvenliği ve yüksek tarımsal verimlilik için modern sulama, sera kurulumları ve lisanslı depoculuk çözümleri üretir.",
-        items: [
-          "Akıllı Damla ve Yağmurlama Sistemleri",
-          "Modern Teknolojik Sera Tesisleri",
-          "Lisanslı Hububat & Soğuk Hava Depoculuğu",
-          "Tohum ve Bitki Besleme AR-GE"
-        ]
+        desc: "Gıda güvenliği ve yüksek verimlilik için modern sulama, sera kurulumları.",
+        items: ["Akıllı Sulama", "Modern Sera Tesisleri", "Lisanslı Depoculuk", "Tohum AR-GE"]
       },
       petrol: {
         title: "1NUR Petrol",
-        desc: "Yurt çapında güvenli akaryakıt ikmali, perakende istasyon yönetimi ve toptan şantiye yakıt ikmal zincirinde yüksek standartlar sağlar.",
-        items: [
-          "Akaryakıt İstasyon Operasyonları",
-          "Toptan Şantiye ve Filo Yakıt İkmali",
-          "Madeni Yağ ve Endüstriyel Sıvı Dağıtımı",
-          "Emniyetli Akaryakıt Depolama Tesisleri"
-        ]
+        desc: "Güvenli akaryakıt ikmali, perakende istasyon yönetimi ve toptan lojistik.",
+        items: ["İstasyon Operasyonları", "Toptan Filo İkmali", "Madeni Yağ Dağıtımı", "Güvenli Depolama"]
       }
     };
 
     function openSectorModal(key) {
       const data = sectorDetails[key];
       if (!data) return;
-      const content = `
+      const modal = document.getElementById('sectorModal');
+      document.getElementById('modalContent').innerHTML = `
         <h3 class="text-2xl font-display font-bold text-white mb-2">${data.title}</h3>
-        <p class="text-sm text-slate-300 mb-4 leading-relaxed">${data.desc}</p>
-        <h4 class="text-xs uppercase font-bold text-brand-gold tracking-wider mb-2 font-mono">Başlıca Hizmet ve Yetkinlikler:</h4>
+        <p class="text-sm text-slate-300 mb-4">${data.desc}</p>
+        <h4 class="text-xs uppercase font-bold text-brand-gold tracking-wider mb-2 font-mono">Yetkinlikler:</h4>
         <ul class="space-y-2 mb-6">
-          ${data.items.map(item => `<li class="text-xs text-slate-300 flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold"></i> ${item}</li>`).join('')}
+          ${data.items.map(i => `<li class="text-xs text-slate-300 flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold"></i> ${i}</li>`).join('')}
         </ul>
-        <button onclick="closeSectorModal()" class="w-full py-3 rounded-xl gold-gradient-bg text-brand-navyDark font-bold text-xs uppercase tracking-wider">Kapat</button>
+        <button onclick="closeSectorModal()" class="w-full py-3 rounded-xl gold-gradient-bg text-brand-navyDark font-bold text-xs uppercase hover:scale-[1.02] transition-transform">Kapat</button>
       `;
-      document.getElementById('modalContent').innerHTML = content;
-      document.getElementById('sectorModal').classList.remove('hidden');
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.add('opacity-100'), 50); // Fade-in effect
     }
 
     function closeSectorModal() {
-      document.getElementById('sectorModal').classList.add('hidden');
+      const modal = document.getElementById('sectorModal');
+      modal.classList.remove('opacity-100');
+      setTimeout(() => modal.classList.add('hidden'), 300);
     }
 
     function handleFormSubmit(e) {
       e.preventDefault();
-      const feedback = document.getElementById('formFeedback');
-      feedback.classList.remove('hidden');
+      document.getElementById('formFeedback').classList.remove('hidden');
       e.target.reset();
-      setTimeout(() => {
-        feedback.classList.add('hidden');
-      }, 5000);
+      setTimeout(() => document.getElementById('formFeedback').classList.add('hidden'), 4000);
     }
   </script>
 </body>
