@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://1beratdemirci.github.io/1NURGROUP/sitemap.xml
