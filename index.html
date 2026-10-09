@@ -107,6 +107,54 @@
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
+    .glass-nav.scrolled {
+      background: rgba(5, 8, 17, 0.98);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+    }
+    .glass-nav.scrolled .nav-shell {
+      height: 4.5rem;
+    }
+    .hero-grid {
+      background-image: linear-gradient(rgba(212, 175, 55, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.08) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 85%);
+      opacity: 0.45;
+    }
+    .hero-watermark {
+      color: rgba(212, 175, 55, 0.08);
+      font-size: clamp(12rem, 34vw, 32rem);
+      line-height: 0.8;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.12em;
+      user-select: none;
+    }
+    .metric-strip {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(15, 23, 42, 0.7));
+      border-top: 1px solid rgba(212, 175, 55, 0.18);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+    }
+    .solution-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .solution-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      background: linear-gradient(120deg, transparent 25%, rgba(255, 255, 255, 0.08), transparent 72%);
+      transform: translateX(-40%);
+    }
+    .solution-card:hover::after {
+      opacity: 1;
+      animation: cardSheen 0.8s ease forwards;
+    }
+    @keyframes cardSheen {
+      to { transform: translateX(40%); }
+    }
     .gold-gradient-text {
       background: linear-gradient(135deg, #FFF3C4 0%, #D4AF37 50%, #99730E 100%);
       background-clip: text;
@@ -274,7 +322,7 @@
 
   <!-- Ana Navigasyon (Header) -->
   <header class="sticky top-0 z-50 glass-nav transition-all duration-300 shadow-xl shadow-black/40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
+    <div class="nav-shell max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between transition-[height] duration-300">
       
       <!-- LOGO -->
       <a href="#" class="flex items-center group h-full py-2" aria-label="1NUR GROUP ana sayfa">
@@ -316,6 +364,8 @@
   <section id="anasayfa" class="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
     
     <div class="absolute inset-0 z-0 overflow-hidden">
+      <div class="hero-grid absolute inset-0 z-10 pointer-events-none"></div>
+      <div class="hero-watermark absolute -right-16 top-1/2 -translate-y-1/2 z-10 pointer-events-none">1N</div>
       <!-- 0. Yazılım -->
       <div id="slide-0" class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100">
         <div class="w-full h-full bg-cover bg-center animate-kenburns" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop');"></div>
@@ -401,6 +451,26 @@
         </button>
       </div>
 
+    </div>
+  </section>
+
+  <!-- GÖRSEL KİMLİK VE ÖLÇEK BANDI - DEMO VERİLER -->
+  <section class="metric-strip py-7 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3 text-center lg:text-left">
+          <span class="w-10 h-10 rounded-full border border-brand-gold/40 text-brand-gold flex items-center justify-center"><i class="fa-solid fa-sparkles"></i></span>
+          <div>
+            <p class="text-white text-sm font-bold">Kurumsal görünüm için örnek vitrin</p>
+            <p class="text-[11px] text-slate-400">Gerçek şirket verileri hazır olduğunda bu alan güncellenecektir.</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-8 sm:gap-14 text-center">
+          <div><div class="text-2xl font-display font-extrabold text-brand-gold">4</div><div class="text-[9px] uppercase tracking-widest text-slate-400">Sektör</div></div>
+          <div><div class="text-2xl font-display font-extrabold text-white">1</div><div class="text-[9px] uppercase tracking-widest text-slate-400">Merkez</div></div>
+          <div><div class="text-2xl font-display font-extrabold text-brand-gold">24/7</div><div class="text-[9px] uppercase tracking-widest text-slate-400">Yaklaşım</div></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -502,7 +572,10 @@
             
             <div class="flex items-center gap-3 mb-6">
               <div class="w-10 h-10 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark font-bold"><i class="fa-solid fa-chart-line"></i></div>
-              <h3 class="font-display font-bold text-xl text-white">Performans Göstergeleri</h3>
+              <div>
+                <h3 class="font-display font-bold text-xl text-white">Performans Göstergeleri</h3>
+                <p class="text-[10px] uppercase tracking-wider text-brand-gold mt-1">Örnek tasarım verisi</p>
+              </div>
             </div>
             
             <div class="space-y-6">
@@ -733,25 +806,25 @@
         <p class="text-slate-400 text-sm mt-3">İhtiyacınıza göre ölçeklenebilen, teknoloji ve operasyonu aynı çatı altında buluşturan çözüm başlıklarımız.</p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <article class="glass-card rounded-2xl p-6 border-blue-500/20 hover:-translate-y-2 transition-transform">
+        <article class="solution-card glass-card rounded-2xl p-6 border-blue-500/20 hover:-translate-y-2 transition-transform">
           <i class="fa-solid fa-cloud text-3xl text-blue-400 mb-5"></i>
           <h3 class="text-lg font-display font-bold text-white mb-2">Dijital Operasyon Merkezi</h3>
           <p class="text-xs leading-relaxed text-slate-300">ERP, yapay zeka, IoT ve bulut mimarileriyle veriyi ölçülebilir iş sonuçlarına dönüştürür.</p>
           <span class="inline-block mt-5 text-[10px] uppercase tracking-wider text-blue-300 font-bold">Yazılım & Mühendislik</span>
         </article>
-        <article class="glass-card rounded-2xl p-6 border-emerald-500/20 hover:-translate-y-2 transition-transform">
+        <article class="solution-card glass-card rounded-2xl p-6 border-emerald-500/20 hover:-translate-y-2 transition-transform">
           <i class="fa-solid fa-route text-3xl text-emerald-400 mb-5"></i>
           <h3 class="text-lg font-display font-bold text-white mb-2">Akıllı Filo Yönetimi</h3>
           <p class="text-xs leading-relaxed text-slate-300">Araç tedariki, telematik takip ve bakım koordinasyonuyla filonuzun sürekliliğini güçlendirir.</p>
           <span class="inline-block mt-5 text-[10px] uppercase tracking-wider text-emerald-300 font-bold">Otomotiv</span>
         </article>
-        <article class="glass-card rounded-2xl p-6 border-amber-500/20 hover:-translate-y-2 transition-transform">
+        <article class="solution-card glass-card rounded-2xl p-6 border-amber-500/20 hover:-translate-y-2 transition-transform">
           <i class="fa-solid fa-seedling text-3xl text-amber-400 mb-5"></i>
           <h3 class="text-lg font-display font-bold text-white mb-2">Verimli Tarım Altyapısı</h3>
           <p class="text-xs leading-relaxed text-slate-300">Sensör destekli sulama, sera otomasyonu ve veri odaklı üretimle verimliliği artırır.</p>
           <span class="inline-block mt-5 text-[10px] uppercase tracking-wider text-amber-300 font-bold">Tarım</span>
         </article>
-        <article class="glass-card rounded-2xl p-6 border-rose-500/20 hover:-translate-y-2 transition-transform">
+        <article class="solution-card glass-card rounded-2xl p-6 border-rose-500/20 hover:-translate-y-2 transition-transform">
           <i class="fa-solid fa-gas-pump text-3xl text-rose-400 mb-5"></i>
           <h3 class="text-lg font-display font-bold text-white mb-2">Enerji İkmal Ağı</h3>
           <p class="text-xs leading-relaxed text-slate-300">Akaryakıt tedariki, stok takibi ve saha operasyonları için güvenilir ikmal planlaması sunar.</p>
@@ -787,14 +860,14 @@
               <div class="w-11 h-11 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark font-bold text-lg shrink-0"><i class="fa-solid fa-phone"></i></div>
               <div>
                 <div class="text-xs text-brand-gold font-bold uppercase tracking-wider">Santral & İletişim</div>
-                <div class="text-sm font-semibold text-white mt-0.5">+90 (312) 400 00 00</div>
+                <a href="tel:+903124000000" class="text-sm font-semibold text-white mt-0.5 hover:text-brand-gold transition-colors">+90 (312) 400 00 00</a>
               </div>
             </div>
             <div class="flex items-center gap-4 p-4 rounded-2xl glass-card hover:border-brand-gold/40 transition-colors">
               <div class="w-11 h-11 rounded-xl gold-gradient-bg flex items-center justify-center text-brand-navyDark font-bold text-lg shrink-0"><i class="fa-solid fa-envelope"></i></div>
               <div>
                 <div class="text-xs text-brand-gold font-bold uppercase tracking-wider">Kurumsal E-Posta</div>
-                <div class="text-sm font-semibold text-white mt-0.5">info@1nurgroup.com</div>
+                <a href="mailto:info@1nurgroup.com" class="text-sm font-semibold text-white mt-0.5 hover:text-brand-gold transition-colors">info@1nurgroup.com</a>
               </div>
             </div>
           </div>
@@ -890,6 +963,11 @@
           <p class="text-white font-semibold text-sm">Berat DEMİRCİ</p>
           <p class="text-brand-gold mb-3 text-xs">Yönetim Kurulu Başkanı</p>
           <p class="text-slate-400 text-[11px]">Genel Merkez: Çukurambar / Ankara</p>
+          <div class="flex gap-3 pt-2">
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn örnek bağlantı" class="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-slate-400 hover:text-brand-gold hover:border-brand-gold/50 transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram örnek bağlantı" class="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-slate-400 hover:text-brand-gold hover:border-brand-gold/50 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+            <span class="text-[10px] text-slate-600 self-center">Örnek bağlantı</span>
+          </div>
         </div>
       </div>
       <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px]">
@@ -978,6 +1056,8 @@
 
     /* 4. SCROLL TO TOP BUTONU */
     window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (header) header.classList.toggle('scrolled', window.scrollY > 24);
       const btn = document.getElementById('scrollTopBtn');
       if (window.scrollY > 400) {
         btn.classList.add('show');
