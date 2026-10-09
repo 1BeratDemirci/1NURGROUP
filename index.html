@@ -124,6 +124,13 @@
       border-top: 1px solid rgba(212, 175, 55, 0.18);
       border-bottom: 1px solid rgba(212, 175, 55, 0.18);
     }
+    .hero-panel {
+      background: linear-gradient(145deg, rgba(5, 8, 17, 0.72), rgba(15, 23, 42, 0.38));
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
     .solution-card {
       position: relative;
       overflow: hidden;
@@ -343,7 +350,7 @@
   </header>
 
   <!-- HAREKETLİ RESİMLİ GİRİŞ (HERO) ALANI -->
-  <section id="anasayfa" class="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
+  <section id="anasayfa" class="relative min-h-[82vh] flex items-center justify-center overflow-hidden">
     
     <div class="absolute inset-0 z-0 overflow-hidden">
       <div class="hero-grid absolute inset-0 z-10 pointer-events-none"></div>
@@ -378,10 +385,11 @@
     </div>
 
     <!-- Hero İçerik -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-30 py-16 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-30 py-16">
+      <div class="max-w-4xl hero-panel rounded-[2rem] p-7 sm:p-10 lg:p-14 text-left">
       
       <!-- Çukurambar Rozeti -->
-      <div class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-brand-gold/40 bg-brand-navyDark/85 backdrop-blur-md text-brand-gold text-xs font-semibold tracking-wider uppercase mb-8 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+      <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-brand-gold/40 bg-brand-navyDark/85 backdrop-blur-md text-brand-gold text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-7 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
         <i class="fa-solid fa-location-dot animate-pulse"></i>
         <span>Merkez: Çukurambar / Ankara</span>
         <span class="w-1.5 h-1.5 rounded-full bg-brand-gold shadow-[0_0_5px_#D4AF37]"></span>
@@ -390,32 +398,32 @@
 
       <div id="hero-text-container" class="text-fade">
         <div class="mb-4">
-          <span id="hero-sector-tag" class="text-brand-gold text-xs sm:text-sm font-bold uppercase tracking-[0.3em] font-mono">
+          <span id="hero-sector-tag" class="text-brand-gold text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] font-mono">
             Yazılım & Bilişim Mühendisliği &bull; Cloud & AI Systems
           </span>
         </div>
 
-        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-white mb-6 leading-[1.15]">
-          Geleceği Şekillendiren <br>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-white mb-6 leading-[1.08]">
+          Teknolojiyle büyüyen <br>
           <span class="gold-gradient-text" id="hero-title-dynamic">Yazılım, Mühendislik & Yatırım</span>
         </h1>
 
-        <p id="hero-desc-dynamic" class="text-base sm:text-xl text-slate-200 font-light max-w-3xl mx-auto mb-10 leading-relaxed drop-shadow-md">
+        <p id="hero-desc-dynamic" class="text-sm sm:text-lg text-slate-200 font-light max-w-2xl mb-9 leading-relaxed drop-shadow-md">
           1NUR GROUP; Ankara Çukurambar merkezli yönetim vizyonuyla Yazılım & Yüksek Teknoloji Mühendisliği, Otomotiv, Modern Tarım, Petrol ve Lojistik sektörlerinde yüksek standartlı projeler yönetmektedir.
         </p>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
-        <a href="#ekosistem" class="w-full sm:w-auto px-8 py-4 rounded-xl gold-gradient-bg text-brand-navyDark font-bold text-sm sm:text-base shadow-xl shadow-brand-gold/25 hover:scale-105 transition-transform flex items-center justify-center gap-2">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-10">
+        <a href="#ekosistem" class="w-full sm:w-auto px-7 py-3.5 rounded-xl gold-gradient-bg text-brand-navyDark font-bold text-sm shadow-xl shadow-brand-gold/25 hover:scale-105 transition-transform flex items-center justify-center gap-2">
           <i class="fa-solid fa-diagram-project"></i> Sektörel Ekosistemi Gör
         </a>
-        <a href="#iletisim" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-white font-semibold text-sm sm:text-base hover:border-brand-gold transition-colors flex items-center justify-center gap-2 group">
+        <a href="#iletisim" class="w-full sm:w-auto px-7 py-3.5 rounded-xl glass-card text-white font-semibold text-sm hover:border-brand-gold transition-colors flex items-center justify-center gap-2 group">
           <i class="fa-solid fa-map-location-dot text-brand-gold group-hover:animate-bounce"></i> Ankara Ofis Ziyareti
         </a>
       </div>
 
       <!-- İNTERAKTİF SEKTÖR DEĞİŞTİRME SEKMELERİ -->
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 max-w-6xl mx-auto text-left relative z-40">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-2.5 max-w-6xl text-left relative z-40">
         <button onclick="handleManualSlide(0)" id="tab-0" class="hero-tab p-3.5 rounded-xl border border-brand-gold bg-brand-gold/15 backdrop-blur-md transition-all text-left flex items-center gap-3">
           <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-brand-gold text-lg shrink-0"><i class="fa-solid fa-code"></i></div>
           <div><div class="text-[10px] text-brand-gold uppercase tracking-wider font-bold">01. Sektör</div><div class="font-bold text-white text-xs sm:text-sm">Yazılım & Müh.</div></div>
@@ -440,7 +448,7 @@
           <div><div class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">05. Sektör</div><div class="font-bold text-white text-xs sm:text-sm">Lojistik</div></div>
         </button>
       </div>
-
+      </div>
     </div>
   </section>
 
