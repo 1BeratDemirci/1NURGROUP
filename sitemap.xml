@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://1beratdemirci.github.io/1NURGROUP/</loc>
+    <loc>https://1nurgroup.com/</loc>
   </url>
   <url>
-    <loc>https://1beratdemirci.github.io/1NURGROUP/kvkk.html</loc>
+    <loc>https://1nurgroup.com/kvkk.html</loc>
   </url>
   <url>
-    <loc>https://1beratdemirci.github.io/1NURGROUP/gizlilik.html</loc>
+    <loc>https://1nurgroup.com/gizlilik.html</loc>
   </url>
+  <url><loc>https://1nurgroup.com/yazilim.html</loc></url>
+  <url><loc>https://1nurgroup.com/otomotiv.html</loc></url>
+  <url><loc>https://1nurgroup.com/tarim.html</loc></url>
+  <url><loc>https://1nurgroup.com/petrol.html</loc></url>
+  <url><loc>https://1nurgroup.com/lojistik.html</loc></url>
+  <url><loc>https://1nurgroup.com/blog-akilli-sulama.html</loc></url>
+  <url><loc>https://1nurgroup.com/blog-filo-telematigi.html</loc></url>
 </urlset>

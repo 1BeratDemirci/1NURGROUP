@@ -1,0 +1,55 @@
+/* 1NUR GROUP - düzeltmeler (index.html'deki <style>'dan SONRA yüklenmeli) */
+
+/* Sticky header bölüm başlıklarını örtmesin */
+section[id] { scroll-margin-top: 6.5rem; }
+
+/* Sadece opacity/transform geçişi (transition: all yerine) */
+.reveal { transition: opacity 0.9s cubic-bezier(0.5, 0, 0, 1), transform 0.9s cubic-bezier(0.5, 0, 0, 1); will-change: opacity, transform; }
+
+/* Ken Burns sadece aktif slaytta çalışsın (performans) */
+.hero-slide.opacity-0 .animate-kenburns { animation-play-state: paused; }
+
+/* Okunabilirlik: çok küçük yazıları 12px'e çek */
+html body .text-\[9px\],
+html body .text-\[10px\],
+html body .text-\[11px\] { font-size: 12px; line-height: 1.4; }
+
+/* Düşük kontrastlı gri tonlarını biraz aç */
+html body .text-slate-500 { color: #94a3b8; }
+html body .text-slate-600 { color: #94a3b8; }
+
+/* Klavye odağı görünür olsun */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #D4AF37;
+  outline-offset: 3px;
+}
+
+/* Scroll-spy aktif menü öğesi */
+header nav a.nav-active { color: #D4AF37; }
+
+/* Modal */
+#sectorModal { z-index: 70; }
+body.modal-open { overflow: hidden; }
+
+/* Gönderim sırasında buton */
+#contactForm button[type="submit"][disabled] { opacity: 0.6; cursor: wait; }
+
+.wizard-step.active { color: #D4AF37; font-weight: 700; }
+.wizard-option { display: flex; align-items: center; gap: 0.65rem; padding: 0.85rem 1rem; border: 1px solid rgba(255,255,255,.1); border-radius: .75rem; color: #cbd5e1; cursor: pointer; }
+.wizard-option:has(input:checked) { border-color: #D4AF37; color: #fff; background: rgba(212,175,55,.08); }
+body.light-theme { background: #f8fafc; color: #1e293b; }
+body.light-theme .bg-brand-navyDark, body.light-theme .bg-brand-navy, body.light-theme .bg-black\/95 { background-color: #f8fafc !important; }
+body.light-theme .text-white { color: #172033 !important; }
+body.light-theme .text-slate-200, body.light-theme .text-slate-300, body.light-theme .text-slate-400 { color: #475569 !important; }
+body.light-theme .glass-card { background: rgba(255,255,255,.84); border-color: rgba(148,163,184,.35); }
+body.light-theme .glass-nav { background: rgba(248,250,252,.94); border-color: rgba(148,163,184,.3); }
+body.light-theme .bg-brand-navy\/60, body.light-theme .bg-brand-navy\/50, body.light-theme .bg-brand-navy\/80 { background-color: #eef2f7 !important; }
+
+/* Hareket azaltma tercihi: tüm sürekli animasyonları kapat */
+@media (prefers-reduced-motion: reduce) {
+  .animate-kenburns, .flow-dash, .hero-kicker, .showcase-image,
+  .animate-pulse, .animate-bounce { animation: none !important; }
+  .reveal { transition: none; opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
